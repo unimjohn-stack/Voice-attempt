@@ -39,10 +39,23 @@ def listen():
 
 def speak(text):
     print("Assistant:", text)
-    tts = gTTS(text=text, lang="fr")
+    tts = gTTS(text=text, lang="en")
     filename = "voice.mp3"
     tts.save(filename)
     playsound.playsound(filename)
+
+def respond(text):
+    text = text.lower()
+    if "hello" in text or "hi" in text:
+        return "Hello! how are you?"
+    elif "what's your name" in text:
+        return "I'm your assistant"
+    elif "can you hear me" in text:
+        return "Yes, i can hear you clearly"
+    elif "goodbye" in text:
+        return "Goodbye, Have a great day."
+    else:
+        return "I'm not sure how to respond to that yet"
 
 recognizer = sr.Recognizer()
 audio = listen()
@@ -53,7 +66,8 @@ audio = listen()
 try:
     text= recognizer.recognize_google(audio)
     print("You said:", text)
-    speak("Yes, I can hear you")
+    response = respond(text)
+    speak(response)
 except sr.UnknownValueError:
     print("Sorry, I could not understand you.")
 except sr.RequestError as e:
