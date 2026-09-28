@@ -12,6 +12,9 @@
 
 import speech_recognition as sr
 import sounddevice as sd
+from gtts import gTTS
+import playsound
+
 
 SAMPLE_RATE = 16000
 CHANNELS = 1
@@ -34,6 +37,13 @@ def listen():
     )
     return audio
 
+def speak(text):
+    print("Assistant:", text)
+    tts = gTTS(text=text, lang="fr")
+    filename = "voice.mp3"
+    tts.save(filename)
+    playsound.playsound(filename)
+
 recognizer = sr.Recognizer()
 audio = listen()
 
@@ -43,6 +53,7 @@ audio = listen()
 try:
     text= recognizer.recognize_google(audio)
     print("You said:", text)
+    speak("Yes, I can hear you")
 except sr.UnknownValueError:
     print("Sorry, I could not understand you.")
 except sr.RequestError as e:
