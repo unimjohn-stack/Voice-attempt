@@ -52,10 +52,6 @@ def respond(text):
         return "I'm your assistant"
     elif "can you hear me" in text:
         return "Yes, i can hear you clearly"
-    elif "who's your daddy" in text:
-        return "You are my daddy"
-    elif "where is your mummy" in text:
-        return "I don't know"
     elif "goodbye" in text:
         return "Goodbye, Have a great day."
     else:
